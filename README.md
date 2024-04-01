@@ -28,7 +28,7 @@ Ex. Spring Boot framework
 <b>Built with</b>
 - Java
 - Maven
-- Springbott
+- Springboot
 
 
 ## Features
@@ -54,8 +54,8 @@ cd zodiakProjectApp <br>
 ### Zodiak's API Syntax Rules
 
 Searching Requirements
-- The Birthdate of a User must be formatted without year and solely in MM DD format.
-- The input is limited to letters, numbers, and special characters '/' and ‘_’.
+- The User input must be formatted without year and solely in MM DD format.
+- The input does not allow any special characters other than numbers.
 
 Listing Requirements
 
