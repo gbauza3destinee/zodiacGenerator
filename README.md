@@ -35,7 +35,6 @@ Ex. Spring Boot framework
 Made with love for astrology! <3
 
 
-
 ## Installation
 Provide step by step series of examples and explanations about how to get a development env running.
 
@@ -44,8 +43,8 @@ Provide step by step series of examples and explanations about how to get a deve
 
 Ex:
 Run in Terminal
-cd zodiakProjectApp <br>
-**cd template_java_project**
+cd zodiakProject <br>
+**cd zodiac**
 
 [template_java_project](https://github.com/gbauza3destinee/zodiakApp/blob/bccf1092c8549be63a1c1862f8cba23afccde0e6/template_java_project)
 
