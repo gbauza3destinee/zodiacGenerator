@@ -109,7 +109,7 @@ public class DateCalculator {
             piscesFirstHalf.setElemental("Water");
             piscesFirstHalf.setName("Pisces");
             piscesFirstHalf.setStartDate("2-19");
-            piscesFirstHalf.setDescription("");
+            piscesFirstHalf.setDescription("Pisces are one of the most empathetic of the zodiac signs, and they will do whatever they can to make sure the people around them are happy. They are also artistic and use their vivid imaginations to think up ideas many others would not.");
             piscesFirstHalf.setEndDate("3-20");
             MonthlyZodiacModel febZodiac2 = new MonthlyZodiacModel(19, 29, 2, piscesFirstHalf);
 
@@ -130,6 +130,7 @@ public class DateCalculator {
             MonthlyZodiacModel marZodiac1 = new MonthlyZodiacModel(1,20,03,piscesSecondHalf);
             piscesSecondHalf.setName("Pisces");
             piscesSecondHalf.setElemental("Water");
+            piscesSecondHalf.setDescription("Pisces are one of the most empathetic of the zodiac signs, and they will do whatever they can to make sure the people around them are happy. They are also artistic and use their vivid imaginations to think up ideas many others would not.");
             piscesSecondHalf.setStartDate("2-19");
             piscesSecondHalf.setEndDate("3-20");
             // ******************************************** Aries ****************************************************//
