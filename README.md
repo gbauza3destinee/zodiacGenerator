@@ -5,6 +5,9 @@ Zodiak is a single page application that takes in a user's birth date in month a
 ## Motivation
 Zodiak makes predicting a User’s sunSign and elemental qualities quick, easy and fun! Share your sign results with your friends and discuss the nuances of Astrology and personalities.
 
+## Design Decisions
+When building out the service layer, I decided to import all of the 12 zodiac signs into a list, rather than calling the database each time to retrieve 12 individual 
+signs. Because I understood that database calls can be costly, I chose to import all of the signs in one DB call.
 ## Build status
 Maven
 Build status of continuous integration

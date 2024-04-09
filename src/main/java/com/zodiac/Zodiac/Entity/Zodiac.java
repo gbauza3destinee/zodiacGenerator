@@ -12,7 +12,7 @@ public class Zodiac {
 
     // every table must give column name
     @Id
-    @Column(name="zodiacName")
+    @Column(name="zodiacname")
     public String name;
 
     @Column(name="elemental")
