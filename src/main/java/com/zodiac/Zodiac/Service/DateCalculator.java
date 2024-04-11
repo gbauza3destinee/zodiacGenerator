@@ -1,5 +1,6 @@
 package com.zodiac.Zodiac.Service;
 import com.zodiac.Zodiac.Entity.Zodiac;
+import com.zodiac.Zodiac.Exception.ZodiacNotFoundException;
 import com.zodiac.Zodiac.Model.MonthlyZodiacModel;
 import com.zodiac.Zodiac.Repository.ZodiacRepository;
 import jakarta.annotation.PostConstruct;
@@ -11,8 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 
-// TODO: Test that using jpa's method pulls the correct instance from DB
-// TODO: Review test making for a Springboot app
 /**
  * * Program starts -> fetch from database  -> populate hashmap -> user request enters -> hashmap fetched
  *    Load list of zodiacs from database. Then populate MonthlyZodiac with description, etc.
@@ -159,7 +158,8 @@ public class DateCalculator {
                         monthMap.put(11, novZodiacs);
                        MonthlyZodiacModel decZodiac1 = new MonthlyZodiacModel(1, 21, 12, sign);
                        decZodiacs.add(decZodiac1);
-
+                   default:
+                       System.out.println("ERROR! Couldn't find a zodiac sign");
                }
             }
             // 1 -  JANUARY Month Zodicas
@@ -611,19 +611,19 @@ public class DateCalculator {
          * @param
          */
 
-        public static Zodiac findZodiacSign(int month, int day){
+        public static Zodiac findZodiacSign(int month, int day) throws ZodiacNotFoundException{
 
             // CHECKS
             // month should be 1-12
             // day should be 1-31
 
             if(  !(month >= 1 && month <= 12)){
-                System.out.println("Invalid month!");
-                return null;
+                System.out.println("Error!");
+                throw new ZodiacNotFoundException("Invalid Month, Zodiac not found!");
             }
             if( !(day >= 1 && day <= 31)){
-                System.out.println("Invalid day");
-                return null;
+                System.out.println("Error");
+                throw new ZodiacNotFoundException("Invalid Month, Zodiac not found!");
             }
 
 
