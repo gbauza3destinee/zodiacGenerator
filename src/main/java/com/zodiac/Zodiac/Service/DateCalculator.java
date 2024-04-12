@@ -20,23 +20,23 @@ import java.util.Map;
 @Service
 public class DateCalculator {
 
-    public static Map<Integer, List<MonthlyZodiacModel>> monthMap = new HashMap<>();
+    private static Map<Integer, List<MonthlyZodiacModel>> monthMap = new HashMap<>();
 
     @Autowired
-    ZodiacRepository zodiacRepository;
+    private ZodiacRepository zodiacRepository;
     /**
-     * Before calling findZodiacSign we need to populate
+     * Before calling findZodiaczodiac we need to populate
      * the map.
      */
     // Runs only when app starts
     @PostConstruct
-    public void init(){
+    private void init(){
         populateMonthlyZodiac();
     }
 
         /**
          * From database,
-         * Populates all zodiac signs by month into hashmap
+         * Populates all zodiac zodiacs by month into hashmap
          *
          */
         public void populateMonthlyZodiac() {
@@ -77,89 +77,97 @@ public class DateCalculator {
             // Write logic & Switch case
             // Repopulate monthlyzodiacmodel with database instance
             // Update data base start date to use 12-22
-            for( Zodiac sign : zodiacList){
-               switch(sign){
+            for( Zodiac zodiac : zodiacList){
+               switch(zodiac.getName()){
                    case "capricorn":
                        System.out.println("Capricorn database instance");
-                       MonthlyZodiacModel janZodiac1 = new MonthlyZodiacModel(1,19 , 1, sign);
+
+                       String startDateDay = zodiac.getStartDate().split("-")[1]; //22
+                       String startDateMonth = zodiac.getStartDate().split("-")[0]; //12
+
+                       String endDateDay = zodiac.getEndDate().split("-")[1]; // 19
+                       String endDateMonth = zodiac.getStartDate().split("-")[0]; //1
+
+                       MonthlyZodiacModel janZodiac1 = new MonthlyZodiacModel(1, Integer.parseInt(endDateDay) , Integer.parseInt(endDateMonth), zodiac);
                        janZodiacs.add(janZodiac1);
-                       MonthlyZodiacModel decZodiac2 = new MonthlyZodiacModel(22, 31, 12, sign);
+                       MonthlyZodiacModel decZodiac2 = new MonthlyZodiacModel(Integer.parseInt(startDateDay), 31, Integer.parseInt(startDateMonth), zodiac);
                        decZodiacs.add(decZodiac2);
+
                        monthMap.put(12, decZodiacs);
                    case "aquarius":
                        System.out.println("Aquarius");
-                       MonthlyZodiacModel janZodiac2 = new MonthlyZodiacModel(20, 31,1, sign);
+                       MonthlyZodiacModel janZodiac2 = new MonthlyZodiacModel(20, 31,1, zodiac);
                        janZodiacs.add(janZodiac2);
                        monthMap.put(1, janZodiacs);
-                       MonthlyZodiacModel febZodiac1 = new MonthlyZodiacModel(1, 18, 2, sign);
+                       MonthlyZodiacModel febZodiac1 = new MonthlyZodiacModel(1, 18, 2, zodiac);
                        febZodiacs.add(febZodiac1);
                    case "pisces":
-                       MonthlyZodiacModel febZodiac2 = new MonthlyZodiacModel(19, 29, 2, sign);
+                       MonthlyZodiacModel febZodiac2 = new MonthlyZodiacModel(19, 29, 2, zodiac);
                        febZodiacs.add(febZodiac2);
                        monthMap.put(2, febZodiacs); // check whether this should be added to end
-                       MonthlyZodiacModel marZodiac1 = new MonthlyZodiacModel(1,20,03,sign);
+                       MonthlyZodiacModel marZodiac1 = new MonthlyZodiacModel(1,20,03,zodiac);
                        marZodiacs.add(marZodiac1);
                    case "aries":
-                       MonthlyZodiacModel marZodiac2 = new MonthlyZodiacModel(21,31, 03, sign);
+                       MonthlyZodiacModel marZodiac2 = new MonthlyZodiacModel(21,31, 03, zodiac);
                         marZodiacs.add(marZodiac2);
                        monthMap.put(3, marZodiacs);
-                       MonthlyZodiacModel aprilZodiac1 = new MonthlyZodiacModel(1,19,04,sign);
+                       MonthlyZodiacModel aprilZodiac1 = new MonthlyZodiacModel(1,19,04,zodiac);
                        aprilZodiacs.add(aprilZodiac1);
                    case "taurus":
-                       MonthlyZodiacModel aprilZodiac2 = new MonthlyZodiacModel(20, 30, 4, sign);
+                       MonthlyZodiacModel aprilZodiac2 = new MonthlyZodiacModel(20, 30, 4, zodiac);
                        aprilZodiacs.add(aprilZodiac2);
                        monthMap.put(4, aprilZodiacs);
-                       MonthlyZodiacModel mayZodiac1 = new MonthlyZodiacModel(1,20,05,sign);
+                       MonthlyZodiacModel mayZodiac1 = new MonthlyZodiacModel(1,20,05,zodiac);
                        mayZodiacs.add(mayZodiac1);
 
                    case "gemini":
-                       MonthlyZodiacModel mayZodiac2 = new MonthlyZodiacModel(21, 31, 5, sign);
+                       MonthlyZodiacModel mayZodiac2 = new MonthlyZodiacModel(21, 31, 5, zodiac);
                         mayZodiacs.add(mayZodiac2);
                        monthMap.put(5, mayZodiacs);
-                       MonthlyZodiacModel juneZodiac1 = new MonthlyZodiacModel(1,20,6, sign);
+                       MonthlyZodiacModel juneZodiac1 = new MonthlyZodiacModel(1,20,6, zodiac);
                        juneZodiacs.add(juneZodiac1);
 
                    case "cancer":
-                       MonthlyZodiacModel juneZodiac2 = new MonthlyZodiacModel(21, 30, 6, sign);
+                       MonthlyZodiacModel juneZodiac2 = new MonthlyZodiacModel(21, 30, 6, zodiac);
                         juneZodiacs.add(juneZodiac2);
                        monthMap.put(6, juneZodiacs);
-                       MonthlyZodiacModel julyZodiac1 = new MonthlyZodiacModel(1,22,7, sign);
+                       MonthlyZodiacModel julyZodiac1 = new MonthlyZodiacModel(1,22,7, zodiac);
                         julyZodiacs.add(julyZodiac1);
                    case "leo":
-                       MonthlyZodiacModel julyZodiac2 = new MonthlyZodiacModel(23,31, 7, sign);
+                       MonthlyZodiacModel julyZodiac2 = new MonthlyZodiacModel(23,31, 7, zodiac);
                         julyZodiacs.add(julyZodiac2);
                        monthMap.put(7, julyZodiacs);
-                       MonthlyZodiacModel augZodiac1 = new MonthlyZodiacModel(1,22, 8, sign);
+                       MonthlyZodiacModel augZodiac1 = new MonthlyZodiacModel(1,22, 8, zodiac);
                        augZodiacs.add(augZodiac1);
 
                    case "virgo":
-                       MonthlyZodiacModel augZodiac2 = new MonthlyZodiacModel(23, 31, 8, sign);
+                       MonthlyZodiacModel augZodiac2 = new MonthlyZodiacModel(23, 31, 8, zodiac);
                         augZodiacs.add(augZodiac2);
                        monthMap.put(8, augZodiacs);
-                       MonthlyZodiacModel septZodiac1 = new MonthlyZodiacModel(1, 22, 9, sign);
+                       MonthlyZodiacModel septZodiac1 = new MonthlyZodiacModel(1, 22, 9, zodiac);
                        septZodiacs.add(septZodiac1);
                    case "libra":
-                       MonthlyZodiacModel septZodiac2 = new MonthlyZodiacModel(23, 30, 9, sign);
+                       MonthlyZodiacModel septZodiac2 = new MonthlyZodiacModel(23, 30, 9, zodiac);
                         septZodiacs.add(septZodiac2);
                         monthMap.put(9, septZodiacs);
-                       MonthlyZodiacModel octZodiac1 = new MonthlyZodiacModel(1, 22, 10, sign);
+                       MonthlyZodiacModel octZodiac1 = new MonthlyZodiacModel(1, 22, 10, zodiac);
                         septZodiacs.add(octZodiac1);
 
                    case "scorpio":
-                       MonthlyZodiacModel octZodiac2 = new MonthlyZodiacModel(23, 31, 10, sign);
+                       MonthlyZodiacModel octZodiac2 = new MonthlyZodiacModel(23, 31, 10, zodiac);
                        octZodiacs.add(octZodiac2);
                        monthMap.put(10, octZodiacs);
-                       MonthlyZodiacModel novZodiac1 = new MonthlyZodiacModel(1, 21, 11, sign);
+                       MonthlyZodiacModel novZodiac1 = new MonthlyZodiacModel(1, 21, 11, zodiac);
                        novZodiacs.add(novZodiac1);
 
                    case "sagittarius":
-                       MonthlyZodiacModel novZodiac2 = new MonthlyZodiacModel(22, 31, 11, sign);
+                       MonthlyZodiacModel novZodiac2 = new MonthlyZodiacModel(22, 31, 11, zodiac);
                         novZodiacs.add(novZodiac2);
                         monthMap.put(11, novZodiacs);
-                       MonthlyZodiacModel decZodiac1 = new MonthlyZodiacModel(1, 21, 12, sign);
+                       MonthlyZodiacModel decZodiac1 = new MonthlyZodiacModel(1, 21, 12, zodiac);
                        decZodiacs.add(decZodiac1);
                    default:
-                       System.out.println("ERROR! Couldn't find a zodiac sign");
+                       System.out.println("ERROR! Couldn't find a zodiac zodiac");
                }
             }
             // 1 -  JANUARY Month Zodicas
@@ -221,7 +229,7 @@ public class DateCalculator {
 //            piscesFirstHalf.setElemental("Water");
 //            piscesFirstHalf.setName("Pisces");
 //            piscesFirstHalf.setStartDate("2-19");
-//            piscesFirstHalf.setDescription("Pisces are one of the most empathetic of the zodiac signs, and they will do whatever they can to make sure the people around them are happy. They are also artistic and use their vivid imaginations to think up ideas many others would not.");
+//            piscesFirstHalf.setDescription("Pisces are one of the most empathetic of the zodiac zodiacs, and they will do whatever they can to make sure the people around them are happy. They are also artistic and use their vivid imaginations to think up ideas many others would not.");
 //            piscesFirstHalf.setEndDate("3-20");
 //            MonthlyZodiacModel febZodiac2 = new MonthlyZodiacModel(19, 29, 2, piscesFirstHalf);
 //
@@ -241,7 +249,7 @@ public class DateCalculator {
 //            MonthlyZodiacModel marZodiac1 = new MonthlyZodiacModel(1,20,03,piscesSecondHalf);
 //            piscesSecondHalf.setName("Pisces");
 //            piscesSecondHalf.setElemental("Water");
-//            piscesSecondHalf.setDescription("Pisces are one of the most empathetic of the zodiac signs, and they will do whatever they can to make " +
+//            piscesSecondHalf.setDescription("Pisces are one of the most empathetic of the zodiac zodiacs, and they will do whatever they can to make " +
 //                    "sure the people around them are happy. They are also artistic and use their vivid imaginations to think up ideas many others would not.");
 //            piscesSecondHalf.setStartDate("2-19");
 //            piscesSecondHalf.setEndDate("3-20");
@@ -254,7 +262,7 @@ public class DateCalculator {
 //            ariesFirstHalf.setName("Aries");
 //            ariesFirstHalf.setStartDate("3-21");
 //            ariesFirstHalf.setEndDate("4-19");
-//            ariesFirstHalf.setDescription("Aries's masculine nature is forthright with vigor, a trait further amplified by its planetary ruler, Mars. Aries is known to be vivacious, enthusiastic, childish, and a bit selfish. Although this sign is impulsive and hotheaded, nobody can deny the quick-thinking and intense call-to-action innate in any Aries. Expressed as the Ram, Aries can be counted on to headbutt its way through anything!\n");
+//            ariesFirstHalf.setDescription("Aries's masculine nature is forthright with vigor, a trait further amplified by its planetary ruler, Mars. Aries is known to be vivacious, enthusiastic, childish, and a bit selfish. Although this zodiac is impulsive and hotheaded, nobody can deny the quick-thinking and intense call-to-action innate in any Aries. Expressed as the Ram, Aries can be counted on to headbutt its way through anything!\n");
 //
 //            MonthlyZodiacModel marZodiac2 = new MonthlyZodiacModel(21,31, 03, ariesFirstHalf);
 ////
@@ -277,7 +285,7 @@ public class DateCalculator {
 //            ariesSecondHalf.setName("Aries");
 //            ariesSecondHalf.setStartDate("3-21");
 //            ariesSecondHalf.setEndDate("4-19");
-//            ariesSecondHalf.setDescription("Aries's masculine nature is forthright with vigor, a trait further amplified by its planetary ruler, Mars. Aries is known to be vivacious, enthusiastic, childish, and a bit selfish. Although this sign is impulsive and hotheaded, nobody can deny the quick-thinking and intense call-to-action innate in any Aries. Expressed as the Ram, Aries can be counted on to headbutt its way through anything!\n");
+//            ariesSecondHalf.setDescription("Aries's masculine nature is forthright with vigor, a trait further amplified by its planetary ruler, Mars. Aries is known to be vivacious, enthusiastic, childish, and a bit selfish. Although this zodiac is impulsive and hotheaded, nobody can deny the quick-thinking and intense call-to-action innate in any Aries. Expressed as the Ram, Aries can be counted on to headbutt its way through anything!\n");
 
 
 
@@ -320,7 +328,7 @@ public class DateCalculator {
 //            geminiFirstHalf.setElemental("Air");
 //            geminiFirstHalf.setStartDate("5-21");
 //            geminiFirstHalf.setEndDate("6-20");
-//            geminiFirstHalf.setDescription("Gemini is an air sign with a ton of superpowers, including multitasking, since they’re multifaceted and live outside of the box. Recognized as the sacred duality present in the universe, Gemini is an intellectual and versatile sign with an endless curiosity and a bright, quick-witted mind.");
+//            geminiFirstHalf.setDescription("Gemini is an air zodiac with a ton of superpowers, including multitasking, since they’re multifaceted and live outside of the box. Recognized as the sacred duality present in the universe, Gemini is an intellectual and versatile zodiac with an endless curiosity and a bright, quick-witted mind.");
 //
 //
 //            MonthlyZodiacModel mayZodiac2 = new MonthlyZodiacModel(21, 31, 5, geminiFirstHalf);
@@ -343,7 +351,7 @@ public class DateCalculator {
 //            geminiSecondHalf.setElemental("Air");
 //            geminiSecondHalf.setStartDate("5-21");
 //            geminiSecondHalf.setEndDate("6-20");
-//            geminiSecondHalf.setDescription("Gemini is an air sign with a ton of superpowers, including multitasking, since they’re multifaceted and live outside of the box. Recognized as the sacred duality present in the universe, Gemini is an intellectual and versatile sign with an endless curiosity and a bright, quick-witted mind.");
+//            geminiSecondHalf.setDescription("Gemini is an air zodiac with a ton of superpowers, including multitasking, since they’re multifaceted and live outside of the box. Recognized as the sacred duality present in the universe, Gemini is an intellectual and versatile zodiac with an endless curiosity and a bright, quick-witted mind.");
 //
 //            MonthlyZodiacModel juneZodiac1 = new MonthlyZodiacModel(1,20,6, geminiSecondHalf);
 
@@ -354,7 +362,7 @@ public class DateCalculator {
 //            cancerFirstHalf.setElemental("Water");
 //            cancerFirstHalf.setStartDate("6-21");
 //            cancerFirstHalf.setEndDate("7-22");
-//            cancerFirstHalf.setDescription("One of Cancer’s strongest assets is their capacity for love—and the lengths they’ll go to for the people they care about. Intuitive and tenacious, this sign sticks to their roots and excels at getting what it wants to protect their family and loved ones,a Cancer sign will give you the world, as long as you give it right back.");
+//            cancerFirstHalf.setDescription("One of Cancer’s strongest assets is their capacity for love—and the lengths they’ll go to for the people they care about. Intuitive and tenacious, this zodiac sticks to their roots and excels at getting what it wants to protect their family and loved ones,a Cancer zodiac will give you the world, as long as you give it right back.");
 
   //          MonthlyZodiacModel juneZodiac2 = new MonthlyZodiacModel(21, 30, 6, cancerFirstHalf);
 
@@ -374,7 +382,7 @@ public class DateCalculator {
 //            cancerSecondHalf.setElemental("Water");
 //            cancerSecondHalf.setStartDate("6-21");
 //            cancerSecondHalf.setEndDate("7-22");
-//            cancerFirstHalf.setDescription("One of Cancer’s strongest assets is their capacity for love—and the lengths they’ll go to for the people they care about. Intuitive and tenacious, this sign sticks to their roots and excels at getting what it wants to protect their family and loved ones,a Cancer sign will give you the world, as long as you give it right back.");
+//            cancerFirstHalf.setDescription("One of Cancer’s strongest assets is their capacity for love—and the lengths they’ll go to for the people they care about. Intuitive and tenacious, this zodiac sticks to their roots and excels at getting what it wants to protect their family and loved ones,a Cancer zodiac will give you the world, as long as you give it right back.");
 
  //           MonthlyZodiacModel julyZodiac1 = new MonthlyZodiacModel(1,22,7,cancerSecondHalf);
 
@@ -386,7 +394,7 @@ public class DateCalculator {
 //            leoFirstHalf.setElemental("Fire");
 //            leoFirstHalf.setStartDate("7-23");
 //            leoFirstHalf.setEndDate("8-22");
-//            leoFirstHalf.setDescription("This king of the jungle has a lust for life. Leo can be bold and fearless, allowing them to take risks and pursue their dreams with vigor. If you know a Leo, then you probably also know that making a good impression is their number one priority. This sign’s creativity and fiery magnetism puts them at the center stage of life.");
+//            leoFirstHalf.setDescription("This king of the jungle has a lust for life. Leo can be bold and fearless, allowing them to take risks and pursue their dreams with vigor. If you know a Leo, then you probably also know that making a good impression is their number one priority. This zodiac’s creativity and fiery magnetism puts them at the center stage of life.");
 //
 //            MonthlyZodiacModel julyZodiac2 = new MonthlyZodiacModel(23,31, 7, leoFirstHalf);
 //
@@ -408,7 +416,7 @@ public class DateCalculator {
 //            leoSecondHalf.setElemental("Fire");
 //            leoSecondHalf.setStartDate("7-23");
 //            leoSecondHalf.setEndDate("8-22");
-//            leoSecondHalf.setDescription("This king of the jungle has a lust for life. Leo can be bold and fearless, allowing them to take risks and pursue their dreams with vigor. If you know a Leo, then you probably also know that making a good impression is their number one priority. This sign’s creativity and fiery magnetism puts them at the center stage of life.");
+//            leoSecondHalf.setDescription("This king of the jungle has a lust for life. Leo can be bold and fearless, allowing them to take risks and pursue their dreams with vigor. If you know a Leo, then you probably also know that making a good impression is their number one priority. This zodiac’s creativity and fiery magnetism puts them at the center stage of life.");
 //
 //            MonthlyZodiacModel augZodiac1 = new MonthlyZodiacModel(1,22, 8, leoSecondHalf);
 
@@ -471,7 +479,7 @@ public class DateCalculator {
 //            libraFirstHalf.setElemental("Air");
 //            libraFirstHalf.setStartDate("9-23");
 //            libraFirstHalf.setEndDate("10-22");
-//            libraFirstHalf.setDescription("Libras are experts at keeping the peace (they are represented by the scales of justice, after all), but there’s nothing stronger than Libra’s congeniality. This sign seeks to be a source of joy for others. They’re basically the epitome of beauty, balance, harmony, and a sense of fair play");
+//            libraFirstHalf.setDescription("Libras are experts at keeping the peace (they are represented by the scales of justice, after all), but there’s nothing stronger than Libra’s congeniality. This zodiac seeks to be a source of joy for others. They’re basically the epitome of beauty, balance, harmony, and a sense of fair play");
 //
 //            MonthlyZodiacModel septZodiac2 = new MonthlyZodiacModel(23, 30, 9, libraFirstHalf);
 //
@@ -491,7 +499,7 @@ public class DateCalculator {
 //            libraSecondHalf.setElemental("Air");
 //            libraSecondHalf.setStartDate("9-23");
 //            libraSecondHalf.setEndDate("10-22");
-//            libraSecondHalf.setDescription("Libras are experts at keeping the peace (they are represented by the scales of justice, after all), but there’s nothing stronger than Libra’s congeniality. This sign seeks to be a source of joy for others. They’re basically the epitome of beauty, balance, harmony, and a sense of fair play");
+//            libraSecondHalf.setDescription("Libras are experts at keeping the peace (they are represented by the scales of justice, after all), but there’s nothing stronger than Libra’s congeniality. This zodiac seeks to be a source of joy for others. They’re basically the epitome of beauty, balance, harmony, and a sense of fair play");
 //
 //
 //            MonthlyZodiacModel octZodiac1 = new MonthlyZodiacModel(1, 22, 10, libraSecondHalf);
@@ -606,7 +614,7 @@ public class DateCalculator {
 
         /***
          * Takes in a User's Month value and User's Day value
-         * Matches the correct zodiac sign using the monthmap
+         * Matches the correct zodiac zodiac using the monthmap
          * returns a zodiac object
          * @param
          */

@@ -11,21 +11,22 @@ import jakarta.persistence.Table;
 public class Zodiac {
 
     // every table must give column name
+    // Private Access Modifiers because we should not be accessing the variables directly, we should only get value by setting.
     @Id
     @Column(name="zodiacname")
-    public String name;
+    private String name;
 
     @Column(name="elemental")
-    public String elemental;
+    private String elemental;
 
     @Column(name="description")
-    public String description;
+    private String description;
 
     @Column(name="startdate")
-    public String startDate;
+    private String startDate;
 
     @Column(name="enddate")
-    public String endDate;
+    private String endDate;
 
     public Zodiac(){
         this.elemental = elemental;
