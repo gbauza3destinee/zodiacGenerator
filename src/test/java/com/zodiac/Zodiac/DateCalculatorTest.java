@@ -159,23 +159,18 @@ public class DateCalculatorTest {
     public void populateMonthlyZodiac_returnsAll12Signs_populatesHashMap(){
         // 1. GIVEN
 
-        dateCalculator.populateMonthlyZodiac();
-
         when(zodiacRepository.findAll()).thenReturn(zodiacList);
+
+        dateCalculator.populateMonthlyZodiac();
 
 
         // WHEN testing how many zodiac signs are populated, should be 12
-        int counter = 0;
-        for( Integer monthInt : monthMap.keySet()){
-            counter ++;
-        }
 
 
         // 2. THEN Verify populated all Zodiac Signs
-        if( counter == 12){
-            Assertions.assertEquals(counter,12);
 
-        }
+            Assertions.assertEquals(monthMap.keySet().size(),12);
+
 
     }
 
@@ -189,10 +184,9 @@ public class DateCalculatorTest {
 
         Zodiac actualResult = dateCalculator.findZodiacSign(month,day);
 
-        if(actualResult.getName() == expected.getName()){
-            Assertions.assertSame(expected, actualResult);
 
-        }
+        Assertions.assertEquals(expected, actualResult);
+
 
     }
 
@@ -202,10 +196,9 @@ public class DateCalculatorTest {
         int day = 20;
         Zodiac expected = new Zodiac();
         Zodiac actualResult = dateCalculator.findZodiacSign(month,day);
-        if(actualResult.getName() != expected.getName()){
-            Assertions.assertNotSame(expected, actualResult);
 
-        }
+        Assertions.assertNotEquals(expected, actualResult);
+
 
     }
 
@@ -213,8 +206,8 @@ public class DateCalculatorTest {
     public void findZodiacSign_withInvalidBirthAndDay_throwsZodiacNotFoundException(){
         int month = 21;
         int day = 40;
-        Zodiac actualResult = dateCalculator.findZodiacSign(month,day);
         when(dateCalculator.findZodiacSign(month, day)).thenThrow( new ZodiacNotFoundException("Invalid input"));
+        Zodiac actualResult = dateCalculator.findZodiacSign(month,day);
 
       Assertions.assertNull(actualResult);
 
