@@ -30,11 +30,14 @@ class ZodiacApplicationTests {
 	}
 
 	// Edge Case
-	public void getZodiacSign_invalidMonthAndDay_returnsZodiac(){
+	public void getZodiacSign_invalidMonthAndDay_throwsZodiac(){
 		int month = 13;
 		int day = 23;
 
 		when(dateCalculator.findZodiacSign(month, day)).thenThrow(new ZodiacNotFoundException("Zodiac not found!"));
 	}
+
+
+
 
 }
