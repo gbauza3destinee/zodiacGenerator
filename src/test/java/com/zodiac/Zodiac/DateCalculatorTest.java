@@ -157,19 +157,21 @@ public class DateCalculatorTest {
      */
     @Test
     public void populateMonthlyZodiac_returnsAll12Signs_populatesHashMap(){
-        // 1. WHEN Call to database
-        when(zodiacRepository.findAll()).thenReturn(zodiacList);
+        // 1. GIVEN
 
         dateCalculator.populateMonthlyZodiac();
 
-        // Map Key:10 , Value:
+        when(zodiacRepository.findAll()).thenReturn(zodiacList);
+
+
+        // WHEN testing how many zodiac signs are populated, should be 12
         int counter = 0;
         for( Integer monthInt : monthMap.keySet()){
             counter ++;
         }
 
 
-        // 2. THEN List populates hashmap
+        // 2. THEN Verify populated all Zodiac Signs
         if( counter == 12){
             Assertions.assertEquals(counter,12);
 
@@ -195,7 +197,7 @@ public class DateCalculatorTest {
     }
 
     @Test
-    public void findZodiacSign_withBirthAndDay_returnsInCorrectZodiacSign(){
+    public void findZodiacSign_withValidBirthAndDay_throwsZodiacNotFoundException(){
         int month = 1;
         int day = 20;
         Zodiac expected = new Zodiac();
