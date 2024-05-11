@@ -60,7 +60,7 @@ public class DateCalculator {
             // Database call
             List<Zodiac> zodiacList = zodiacRepository.findAll();
 
-            // Lists for hashmap
+//            Hardcode set values for Hashmap
             List<MonthlyZodiacModel> janZodiacs = new ArrayList<>();
             monthMap.put(1, janZodiacs);
 
@@ -104,7 +104,7 @@ public class DateCalculator {
                        int startDateMonth = Integer.parseInt(zodiac.getStartDate().split("-")[0]); //12
 
                        int endDateDay = Integer.parseInt(zodiac.getEndDate().split("-")[1]); // 19
-                       int endDateMonth = Integer.parseInt(zodiac.getStartDate().split("-")[0]); //1
+                       int endDateMonth = Integer.parseInt(zodiac.getEndDate().split("-")[0]); //1
 
                        MonthlyZodiacModel zodiac1 = new MonthlyZodiacModel(1, endDateDay , endDateMonth, zodiac);
                        MonthlyZodiacModel zodiac2 = new MonthlyZodiacModel(startDateDay, 31, startDateMonth, zodiac);
@@ -138,7 +138,7 @@ public class DateCalculator {
              */
 
 
-        }
+        } // corrected error.
 
 
 
@@ -169,16 +169,17 @@ public class DateCalculator {
             List<MonthlyZodiacModel> monthZodiacs =  monthMap.get(month);
             System.out.println(monthZodiacs.size());
 
-            // example 12-28
-            // capricorn 12 -22 --> 12-31
-            // Sagitarrius 12-01 --> 12-21
+
             // 2. Iterate through list of MonthlyZodiac
 
-            // TODO: Access the zodiac part within the loop
+            // GIVEN 07/19 -> Cancer season spans 06-23 < 19 && 07 -22 > 19, Program returns Leo
+            // GIVEN  08 22 -> Leo season spans 07-23 > 22 && 08-22 == 22, Program returns Virgo
+
             for( MonthlyZodiacModel thisZodiac : monthZodiacs){
                 // Check the day against startday and endday
-                if(day >= thisZodiac.startDay && day <= thisZodiac.endDay ){
-                    return thisZodiac.getZodiac();
+                 if(day >= thisZodiac.startDay && day <= thisZodiac.endDay) {
+
+                        return thisZodiac.getZodiac();
                 }
             }
 
