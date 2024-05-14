@@ -34,9 +34,9 @@ public class ZodiacController {
     @GetMapping("/zodiac")
     public ResponseEntity<Zodiac> findZodiacByDate(@RequestParam("month") int month, @RequestParam("day") int day)
     {
-        System.out.println("Controller api called!");
+        System.out.println("The api was called!");
         Logger logger = Logger.getLogger("Controller logger");
-        logger.log(Level.INFO,"API endpoint called");
+        logger.log(Level.INFO,"Logger- The API was called");
 
         Zodiac zodiac = dateCalculator.findZodiacSign(month, day);
 
