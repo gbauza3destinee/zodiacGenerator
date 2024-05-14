@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class ZodiacApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Hello, Running Docker container!");
+		System.out.println("Hello, Spinning up program locally");
 		SpringApplication.run(ZodiacApplication.class, args);
 	}
 
