@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 // Clarify the transaction happening here-- are we checking DB or
@@ -32,6 +34,10 @@ public class ZodiacController {
     @GetMapping("/zodiac")
     public ResponseEntity<Zodiac> findZodiacByDate(@RequestParam("month") int month, @RequestParam("day") int day)
     {
+        System.out.println("Controller api called!");
+        Logger logger = Logger.getLogger("Controller logger");
+        logger.log(Level.INFO,"API endpoint called");
+
         Zodiac zodiac = dateCalculator.findZodiacSign(month, day);
 
         if(Objects.isNull(zodiac)){
